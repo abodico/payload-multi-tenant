@@ -86,7 +86,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   globals: {
     navigation: Navigation;
@@ -128,12 +128,12 @@ export interface UserAuthOperations {
  * via the `definition` "tenants".
  */
 export interface Tenant {
-  id: string;
+  id: number;
   name: string;
   domain: string;
   settings: {
     themeColor?: string | null;
-    logo?: (string | null) | Media;
+    logo?: (number | null) | Media;
     direction: 'rtl' | 'ltr';
   };
   updatedAt: string;
@@ -144,7 +144,7 @@ export interface Tenant {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -163,10 +163,10 @@ export interface Media {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   tenants?:
     | {
-        tenant: string | Tenant;
+        tenant: number | Tenant;
         id?: string | null;
       }[]
     | null;
@@ -193,21 +193,21 @@ export interface User {
  * via the `definition` "pages".
  */
 export interface Page {
-  id: string;
+  id: number;
   title: string;
   /**
    * URL path for the page (e.g., "about", "contact")
    */
   slug: string;
   fullSlug?: string | null;
-  tenant: string | Tenant;
+  tenant: number | Tenant;
   status?: ('draft' | 'published') | null;
   layout?:
     | (
         | {
             heading: string;
             subheading?: string | null;
-            backgroundImage?: (string | null) | Media;
+            backgroundImage?: (number | null) | Media;
             ctaButton?: {
               text?: string | null;
               link?: string | null;
@@ -245,7 +245,7 @@ export interface Page {
                   name: string;
                   description?: string | null;
                   price?: number | null;
-                  image?: (string | null) | Media;
+                  image?: (number | null) | Media;
                   id?: string | null;
                 }[]
               | null;
@@ -260,7 +260,7 @@ export interface Page {
                   author: string;
                   role?: string | null;
                   quote: string;
-                  avatar?: (string | null) | Media;
+                  avatar?: (number | null) | Media;
                   id?: string | null;
                 }[]
               | null;
@@ -291,7 +291,7 @@ export interface Page {
   seo?: {
     metaTitle?: string | null;
     metaDescription?: string | null;
-    ogImage?: (string | null) | Media;
+    ogImage?: (number | null) | Media;
     keywords?: string | null;
   };
   direction?: ('ltr' | 'rtl') | null;
@@ -304,28 +304,28 @@ export interface Page {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
         relationTo: 'tenants';
-        value: string | Tenant;
+        value: number | Tenant;
       } | null)
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
       } | null)
     | ({
         relationTo: 'pages';
-        value: string | Page;
+        value: number | Page;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -335,10 +335,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -358,7 +358,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -578,7 +578,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "navigation".
  */
 export interface Navigation {
-  id: string;
+  id: number;
   brandName?: string | null;
   links?:
     | {
@@ -596,7 +596,7 @@ export interface Navigation {
  * via the `definition` "footer".
  */
 export interface Footer {
-  id: string;
+  id: number;
   links?:
     | {
         label?: string | null;
